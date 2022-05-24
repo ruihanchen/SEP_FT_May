@@ -13,40 +13,44 @@ in a table
 3. Tell me about check constraint
 --The CHECK constraint is used to limit the value range that can be placed in a column.
 
+
 4. Difference between temp table and table variable
 --Temp tables are physically created in the tempdb database. These tables act as the normal table and also can have constraints, index like normal tables.
 --Table variable acts like a variable and exists for a particular batch of query execution. It gets dropped once it comes out of batch.
 
---5. Difference between WHERE and HAVING
+
+5. Difference between WHERE and HAVING
 --WHERE clause is used to specify a condition for filtering records before any groupings are made.
 --HAVING clause is used to specify a condition for filtering values from a group.
 
 
---6. Difference between RANK() and DenseRank() — value gap
+6. Difference between RANK() and DenseRank() — value gap
 --RANK will then skip the next available ranking value. 
 --DENSE_RANK would still use the next chronological ranking value, and it never gives any gaps..
 
 
---7. COUNT(*) vs. COUNT(colName)
+7. COUNT(*) vs. COUNT(colName)
 --COUNT(*) returns all rows whether column contains null value or not. 
 --COUNT(colName) returns the number of rows except null rows.
 
 
---8. What's the difference between left join and inner join? JOIN and Subquery, which one has a better performance, why?
+8. What's the difference between left join and inner join? JOIN and Subquery, which one has a better performance, why?
 --The result set of a left join includes all the rows from the left table specified in the LEFT OUTER clause. Inner Join just the ones in which the joined columns match.
 -- JOIN has a better perfomance which executes better and has a faster retrieval time of the query. By using joins, users can maximize the calculation burden on the database i.e., instead of multiple queries using one join query.
 
---9. What is correlated subquery
+
+9. What is correlated subquery
 --In a SQL database query, a correlated subquery (also known as a synchronized subquery) is a subquery (a query nested inside another query) that uses values from the outer query. Because the subquery may be evaluated once for each row processed by the outer query, it can be inefficient.
 
 
---10. What is a CTE, why do we need CTE?
+10. What is a CTE, why do we need CTE?
 --CTE specifies a temporary named result set.
 We need CTE, because CTE improves readability and manageability of complex SQL Statements.
 
 
 11. What does SQL Profiler do?
 --SQL Server Profiler is an interface to create and manage traces and analyze and replay trace results.
+
 
 12. What is SQL injection, how to avoid SQL injection?
 --SQL injection is a code injection technique that might destroy your database.
@@ -86,6 +90,7 @@ We need CTE, because CTE improves readability and manageability of complex SQL S
 b. Access objects in a similar logical manner in multiple transactions.
 c. Create a covering index to reduce the possibility of a deadlock.
 
+
 18. what is normalization, 1NF - BCNF, benefits using normalization
 --1NF is A table is referred to as being in its First Normal Form if atomicity of the table is 1.
 --The first condition for the table to be in Second Normal Form is that the table has to be in First Normal Form. The table should not possess partial dependency. The partial dependency here means the proper subset of the candidate key should give a non-prime attribute.
@@ -100,9 +105,11 @@ c. Create a covering index to reduce the possibility of a deadlock.
 20. composite key
 --A composite key in SQL can be defined as a combination of multiple columns, and these columns are used to identify all the rows that are involved uniquely
 
+
 21. candidate key
 --Candidate key is a single key or a group of multiple keys that uniquely identify rows in a table.
 --Create a candidate key with declare a column as a candidate key by using the keyword UNIQUE . Precede the UNIQUE keyword with the NOT NULL specification.
+
 
 22. DDL vs. DML
 --DDL is Data Definition Language which is used to define data structures. For example: create table, alter table are instructions in SQL. 
@@ -112,8 +119,10 @@ c. Create a covering index to reduce the possibility of a deadlock.
 23. ACID property
 --The ACID properties define SQL database key properties to ensure consistent, safe and robust database modification when saved. ACID is an acronym that helps to remember the fundamental principles of a transnational system. ACID stands for Atomic, Consistent, Isolation, and Durability.
 
+
 24. table scan vs. index scan
 -Table scan means iterate over all table rows. Index scan means iterate over all index items.
+
 
 25. Difference between Union and JOIN
 --Join: Joins the table based on certain conditions.
