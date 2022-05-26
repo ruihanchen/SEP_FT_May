@@ -15,8 +15,8 @@ The length property of an object which is an instance of type Array sets or retu
 
 5. Can you store multiple data types in System.Array?
 We can't store multiple datatype in an Array, we can store similar datatype only in an Array.
-6. What’s the difference between the System.Array.CopyTo() and System.Array.Clone()
 
+6. What’s the difference between the System.Array.CopyTo() and System.Array.Clone()
 The Clone() method returns a new array (a shallow copy) object containing all the elements in the original array. 
 The CopyTo() method copies the elements into another existing array. Both perform a shallow copy. 
 
