@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Test your knowledge
 1. What are the six combinations of access modifier keywords and what do they do? 
 a.Public: Objects that implement public access modifiers are accessible from everywhere in a project without 
@@ -48,24 +48,34 @@ can implement or override whereas an interface only permits you to state functio
 The access level for class members and struct members, including nested classes and structs, is private by default. 
 Private nested types are not accessible from outside the containing type.
 
-12. True/False. Polymorphism allows derived classes to provide different implementations
+12. True. Polymorphism allows derived classes to provide different implementations
 of the same method.
-13. True/False. The override keyword is used to indicate that a method in a derived class is
+
+13. True. The override keyword is used to indicate that a method in a derived class is
 providing its own implementation of a method.
-14. True/False. The new keyword is used to indicate that a method in a derived class is
+
+14. True. The new keyword is used to indicate that a method in a derived class is
 providing its own implementation of a method.
-15. True/False. Abstract methods can be used in a normal (non-abstract) class. 16.
-True/False. Normal (non-abstract) methods can be used in an abstract class. 17. True/False.
-Derived classes can override methods that were virtual in the base class. 18. True/False.
-Derived classes can override methods that were abstract in the base class. 19. True/False.
-In a derived class, you can override a method that was neither virtual non abstract in the
+15. True/False. Abstract methods can be used in a normal (non-abstract) class. 
+
+16.True.  Normal (non-abstract) methods can be used in an abstract class. 
+
+17. True. Derived classes can override methods that were virtual in the base class. 
+
+18. True. Derived classes can override methods that were abstract in the base class. 
+
+19. False. In a derived class, you can override a method that was neither virtual non abstract in the
 base class.
-20. True/False. A class that implements an interface does not have to provide an
+
+20. False. A class that implements an interface does not have to provide an
 implementation for all of the members of the interface.
-21. True/False. A class that implements an interface is allowed to have other members that
+
+21. True. A class that implements an interface is allowed to have other members that
 aren’t defined in the interface.
-22. True/False. A class can have more than one base class.
-23. True/False. A class can implement more than one interface.*/
+
+22. True. A class can have more than one base class.
+
+23. True. A class can implement more than one interface.*/
 
 
 /*
@@ -145,7 +155,7 @@ the third number is 1 + 1, which is 2. The fourth number is the 2nd number plus 
 which is 1 + 2. So the fourth number is 3. The 5th number is the 3rd number plus the 4th
 number: 2 + 3 = 5. This keeps going forever.*/
 
-namespace _18.Recursion
+namespace Recursion
 {
     class Program
     {
@@ -224,20 +234,79 @@ class Person
 /*2. Use /Abstraction/ to define different classes for each person type such as Student
 and Instructor. These classes should have behavior for that type of person.*/
 
+//public abstract class person 
+//{
+//    public abstract void persontype();
+//}
+//public class Type : person
+//{
+//    public override void persontype()
+//    {
+//        Console.WriteLine("type: student");
+//        Console.WriteLine("type: instructor");
+//    }
+//}
 
 
 /*3. Use /Encapsulation/ to keep many details private in each class.*/
+//public abstract class person
+//{
+//    public abstract void persontype();
+//    private string Name;
+//    private string Phone;
 
+//}
+//public class Type : person
+//{
+//    public override void persontype()
+//    {
+//        Console.WriteLine("type: student");
+//        Console.WriteLine("type: instructor");
+//    }
+//}
 
 
 /*4. Use /Inheritance/ by leveraging the implementation already created in the Person
-class to save code in Student and Instructor classes*/.
-
+class to save code in Student and Instructor classes*/
+//public abstract class person
+//{
+//    public abstract void persontype();
+//}
+//public class Type : person
+//{
+//    public override void persontype()
+//    {
+//        Console.WriteLine("type: student");
+//        Console.WriteLine("type: instructor");
+//    }
+//}
 
 
 /*5. Use /Polymorphism/ to create virtual methods that derived classes could override to
 create specific behavior such as salary calculations.*/
 
+//public abstract class person
+//{
+//    public abstract void persontype();
+
+//    public void senior(int age)
+//    {
+
+//    }
+
+//    public void senior(int age, int workyears)
+//    {
+
+//    }
+//}
+//public class Type : person
+//{
+//    public override void persontype()
+//    {
+//        Console.WriteLine("type: student");
+//        Console.WriteLine("type: instructor");
+//    }
+//}
 
 
 
@@ -247,11 +316,127 @@ IInstructorService, IDepartmentService, IPersonService, IPersonService (should h
 person specific methods). IStudentService, IInstructorService should inherit from
 IPersonService.
 Person*/
+//public interface IPersonService
+//{
 
+//}
+//public interface ICourseService
+//{
+
+//}
+//public interface IStudentService
+//{
+
+//}
+//public interface IInstructorService
+//{
+
+//}
+//public interface IDepartmentService
+//{
+
+//}
 
 
 /*7. Try creating the two classes below, and make a simple program to work with them, as
 described below*/
 
 
+namespace RGB
+{ 
+public class ColorRGB
+{
+    private ColorRGB(double _red, double _green, double _blue)
+    {
+        Red = _red;
+        Green = _green;
+        Blue = _blue;
+    }
+
+    public static ColorRGB ColorRGB_RGBModel(double _red, double _green, double _blue)
+    {
+        return new ColorRGB(_red, _green, _blue);
+    }
+
+    public static ColorRGB ColorRGB_CMYModel(double _cyan, double _magenta, double _yellow)
+    {
+        var _red = 1 - _cyan;
+        var _green = 1 - _magenta;
+        var _blue = 1 - _yellow;
+        return new ColorRGB(_red, _green, _blue);
+    }
+
+    public ColorRGB AddRGB(ColorRGB _secondColor)
+    {
+        return ColorRGB_RGBModel(this.Red + _secondColor.Red, this.Green + _secondColor.Green, this.Blue + _secondColor.Blue);
+    }
+
+    public ColorRGB SubtractRGB(ColorRGB _secondColor)
+    {
+        return ColorRGB_RGBModel(this.Red - _secondColor.Red, this.Green - _secondColor.Green, this.Blue - _secondColor.Blue);
+    }
+
+    public double Red
+    {
+        get { return red; }
+        private set { red = red < 0 ? 0 : (red > 1 ? 1 : value); }
+    }
+    public double Green
+    {
+        get { return green; }
+        private set { green = green < 0 ? 0 : (green > 1 ? 1 : value); }
+    }
+    public double Blue
+    {
+        get { return blue; }
+        private set { blue = blue < 0 ? 0 : (blue > 1 ? 1 : value); }
+    }
+    public double Cyan
+    {
+        get { return cyan; }
+        private set { cyan = cyan < 0 ? 0 : (cyan > 1 ? 1 : value); }
+    }
+    public double Magenta
+    {
+        get { return magenta; }
+        private set { magenta = magenta < 0 ? 0 : (magenta > 1 ? 1 : value); }
+    }
+    public double Yellow
+    {
+        get { return yellow; }
+        private set { yellow = yellow < 0 ? 0 : (yellow > 1 ? 1 : value); }
+    }
+
+    private double red;
+    private double green;
+    private double blue;
+    private double cyan;
+    private double magenta;
+    private double yellow;
+    }
+}
+
+namespace Ball1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Ball ballOne = new Ball(20, 30, 20, 30);
+            ballOne.Throw();
+            Console.WriteLine(ballOne.TimesThrown);
+            ballOne.Pop();
+            Console.WriteLine(ballOne.Size);
+            try
+            {
+                ballOne.Throw();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
+}
 
