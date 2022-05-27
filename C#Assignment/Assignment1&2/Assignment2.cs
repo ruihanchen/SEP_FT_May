@@ -1,24 +1,33 @@
-﻿/*Test your Knowledge
+/*Test your Knowledge
 1. When to use String vs. StringBuilder in C# ?
-If a string is going to remain constant throughout the program, then use String class object because a String object is immutable.
-If a string can change (example: lots of logic and operations in the construction of the string) then using a StringBuilder is the best option.
+Since string is immutable, it’s good to store some sensitive data, such as username and password. String Builder is
+mutable, usually it is used inside the method implementation, so that we can modify the text based on the needs ,
+and convert the string builder into string once the operation finished.
 
 2. What is the base class for all arrays in C#?
+Object class
 The Array class is the base class for all the arrays in C#. It is defined in the System namespace. 
 The Array class provides various properties and methods to work with arrays.
  
 3.How do you sort an array in C#?
- We can sort a one-dimensional array in two ways, using Array. Sort() method and using LINQ query
+Array.Sort() method
 
 4.What property of an array object can be used to get the total number of elements in an array?
-The length property of an object which is an instance of type Array sets or returns the number of elements in that array.
+Array.Length property
 
 5. Can you store multiple data types in System.Array?
-We can't store multiple datatype in an Array, we can store similar datatype only in an Array.
+If we create an object array, we are able to store multiple data types in an array
+https://www.c-sharpcorner.com/UploadFile/955025/C-Sharp-interview-questions-part1/
 
 6. What’s the difference between the System.Array.CopyTo() and System.Array.Clone()
-The Clone() method returns a new array (a shallow copy) object containing all the elements in the original array. 
-The CopyTo() method copies the elements into another existing array. Both perform a shallow copy. 
+System.Array.Clone() will return a shallow copy of the array. A shallow copy of an Array copies only the elements of
+the Array, whether they are reference types or value types, but it does not copy the objects that the references refer
+to. The references in the new Array point to the same objects that the references in the original Array point to.
+
+System.Array.CopyTo() will copy all the elements of the current one-dimensional array to the specified onedimensional
+array. This method copies all the elements of the current array instance to the destination array, starting
+at index. The destination array must already have been dimensioned and must have a sufficient number of elements
+to accommodate the copied elements. Otherwise, the method throws an exception.
 
 
 
@@ -31,17 +40,24 @@ in the array.
  */
 
 
-//char[] firstArray = new char[10] { 'x', 'g', 'z', 'd', 'b', 'n', 'f', 's', 'h', 'e' };
-//char[] secondArray = new char[firstArray.Length];
-
-//for (int i = 0; i < firstArray.Length; i++)
-//{
-//    secondArray[i] = firstArray[i];
-//}
-
-//Console.WriteLine(secondArray);
-//Console.ReadLine();
-
+using System;
+namespace CopyOfArray
+{
+    class Program
+    {
+        public void CopyAnArray(int[] array)
+        {
+            int[] newArr = new int[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                newArr[i] = array[i];
+                Console.WriteLine($"The {i}th element of array is {array[i]}");
+                Console.WriteLine($"The {i}th element of copied array is {newArr[i]}");
+                Console.WriteLine();
+            }
+        }
+    }
+}
 
 
 /*
@@ -51,27 +67,54 @@ implement an infinite loop.
  */
 
 
-//public int RemoveElement(int[] nums, int val)
-//{
-//    if (nums == null || nums.Length == 0)
-//        return 0;
-
-//    int slowIndex = 0, fastIndex = 0;
-
-//    while (slowIndex <= nums.Length - 1 && fastIndex <= nums.Length - 1)
-//    {
-//        if (nums[fastIndex] != val)
-//        {
-//            nums[slowIndex] = nums[fastIndex];
-//            slowIndex++;
-//            fastIndex++;
-//        }
-//        else
-//            fastIndex++;
-//    }
-
-//    return slowIndex;
-//}
+using System;
+namespace ManageListOfElements
+{
+    class Program
+    {
+        public void ManageElements()
+        {
+            List<string> list = new List<string>();
+            Console.Write("Enter command (+ item, - item or -- to clear): ");
+            string operation = Console.ReadLine();
+            while (operation != null)
+            {
+                switch (operation)
+                {
+                    case "+":
+                        Console.Write("Please enter the element: ");
+                        list.Add(Console.ReadLine());
+                        Console.WriteLine($"The current list is: ");
+                        foreach (var item in list)
+                        {
+                            Console.Write(item + "\t");
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "-":
+                        list.RemoveAt(list.Count - 1);
+                        Console.WriteLine($"The current list is: {list}");
+                        Console.WriteLine($"The current list is: ");
+                        foreach (var item in list)
+                        {
+                            Console.Write(item + "\t");
+                        }
+                        Console.WriteLine();
+                        break;
+                    case "--":
+                        list.Clear();
+                        Console.WriteLine("You have removed all the elements");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid operation");
+                        break;
+                }
+                Console.WriteLine("Insert another input to Continue: ");
+                operation = Console.ReadLine();
+            }
+        }
+    }
+}
 
 
 
@@ -80,33 +123,55 @@ implement an infinite loop.
 of integers 
  */
 
-//int start = 1, end = 100;
-//Console.WriteLine($"The prime numbers between {start} and {end} are :");
-
-//var numbers = Enumerable.Range(start, end - start)
-//                        .Where(IsPrime)
-//                        .Select(number => number)
-//                        .ToList();
-
-//Console.WriteLine(string.Join(", ", numbers));
-
-//bool IsPrime(int number)
-//{
-//    // local function
-//    bool CalculatePrime(int value)
-//    {
-//        var possibleFactors = Math.Sqrt(number);
-//        for (var factor = 2; factor <= possibleFactors; factor++)
-//        {
-//            if (value % factor == 0)
-//            {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-//    return number > 1 && CalculatePrime(number);
-//}
+using System;
+namespace CalcAllPM
+{
+    class Program
+    {
+        public void ManageElements()
+        {
+            public int[] FindPrimesInRange(int startNum, int endNum)
+            {
+                if (startNum <= 0 || endNum <= 0 || startNum > endNum)
+                {
+                    return null;
+                }
+                List<int> res = new List<int>();
+                for (int i = startNum; i <= endNum; i++)
+                {
+                    if (CheckPrime(i))
+                    {
+                        res.Add(i);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                return res.ToArray();
+            }
+            private bool CheckPrime(int a)
+            {
+                for (int i = 2; i <= Math.Sqrt(a); i++)
+                {
+                    if (a % i == 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            //call FindPrimesInRange in program.cs:
+            DayTwoSolution solution = new DayTwoSolution(); 
+            // I implement this method inside DayTwoSolution class
+            int[] res = solution.FindPrimesInRange(2, 20);
+            foreach (var item in res)
+            {
+                Console.WriteLine(item);
+            }
+        }
+    }
+}
 
 
 
@@ -117,27 +182,41 @@ integer k, rotate the array right k times and sum the obtained arrays after each
 shown below.
  */
 
-//public class rRotateSum {
-//    static void Rotate(int[] a, int k)
-//    {
-//        k = k % a.Length;
-//        reverse(a, 0, a.Length - 1);
-//        reverse(a, 0, k - 1);
-//        reverse(a, k, a.Length - 1);
-//    }
-//    static void reverse(int[] a, int s, int e)
-//    {
-//        while (s < e)
-//        {
-//            int temp = a[s];
-//            a[s] = a[e];
-//            a[e] = temp;
-//            s++;
-//            e--;
-//        }
-//    }
-
-//}
+using System;
+namespace ReadArrayOfNInt
+{
+    class Program
+    {
+        public int[] SumAfterRotation(int[] arr, int k)
+        {
+            int times = k / arr.Length;
+            int move = k % arr.Length;
+            int sum = 0;
+            int[] res = new int[arr.Length];
+            foreach (var item in arr)
+            {
+                sum = sum + item;
+            }
+            sum = sum * times;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 1; j <= move; j++)
+                {
+                    if (i - j >= 0)
+                    {
+                        res[i] = res[i] + arr[i - j];
+                    }
+                    else
+                    {
+                        res[i] = res[i] + arr[i - j + arr.Length];
+                    }
+                }
+                res[i] = sum + res[i];
+            }
+            return res;
+        }
+    }
+}
 
 
 
@@ -148,27 +227,38 @@ If several longest sequences exist, print the leftmost one.
  */
 
 
-//int[] numbers = new[] { 0, 1, 1, 5, 2, 2, 6, 3, 3 };
-
-//int count = 1;
-//int longestNum = numbers[0];
-//int longestCount = 1;
-
-//for (int i = 1; i < numbers.Length; i++)
-//{
-//    if (numbers[i] != numbers[i - 1])
-//    {
-//        count = 0;
-//    }
-//    count++;
-
-//    if (count > longestCount)
-//    {
-//        longestCount = count;
-//        longestNum = numbers[i];
-//    }
-//}
-//Console.WriteLine(string.Join(" ", Enumerable.Repeat(longestNum, longestCount)));
+using System;
+namespace LongestSquence
+{
+    class Program
+    {
+        public int[] LongestSequence(int[] arr)
+        {
+            int num = arr[0];
+            int maxCount = 1;
+            int count = 1;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] == arr[i - 1])
+                {
+                    count++;
+                    if (count > maxCount)
+                    {
+                        maxCount = count;
+                        num = arr[i];
+                    }
+                }
+                else
+                {
+                    count = 1;
+                }
+            }
+            int[] res = new int[maxCount];
+            Array.Fill(res, num);
+            return res;
+        }
+    }
+}
 
 
 /*
@@ -176,22 +266,42 @@ If several longest sequences exist, print the leftmost one.
 case of multiple numbers with the same maximal frequency, print the leftmost of them
  */
 
-//int startNum, endNum;
-
-//static int[] FindPrimesInRange(startNum, endNum)
-//{
-//    for (int i = startNum; i < endNum; i++)
-//    {
-//        for (int j = 2; j <= i / 2; j++)
-//        {
-//            if (i % j == 0)
-//            {
-//                Console.WriteLine();
-//                break;
-//            }
-//        }
-//    }
-//}
+using System;
+namespace MostFrequentNumber
+{
+    class Program
+    {
+        public void MostFrequentNumber(int[] arr)
+        {
+            Dictionary<int, int> freq = new Dictionary<int, int>();
+            Dictionary<int, int> firstOccurrence = new Dictionary<int, int>();
+            int leftmost = int.MaxValue;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!freq.ContainsKey(arr[i]))
+                {
+                    freq.Add(arr[i], 1);
+                    firstOccurrence.Add(arr[i], i);
+                }
+                else
+                {
+                    freq[arr[i]]++;
+                }
+            }
+            int mostFreq = freq.Values.Max();
+            int num = -1;
+            foreach (var key in freq.Keys)
+            {
+                if (freq[key] == mostFreq && firstOccurrence[key] < leftmost)
+                {
+                    leftmost = firstOccurrence[key];
+                    num = arr[leftmost];
+                }
+            }
+            Console.WriteLine($"The number {num} is the most frequent (occurs {mostFreq} times)");
+        }
+    }
+}
 
 
 
@@ -215,37 +325,91 @@ result back at the console.
 //		s[n - i - 1] = temp;
 //	}
 //}
+using System;
+namespace ReverseString
+{
+    class Program
+    {
+        public string ReverseStringOne(string s)
+        {
+            if (s == null)
+            {
+                return string.Empty;
+            }
+            char[] chars = s.ToCharArray();
+            for (int i = 0, j = chars.Length - 1; i < j; i++, j--)
+            {
+                char c = chars[i];
+                chars[i] = chars[j];
+                chars[j] = c;
+            }
+            string res = new string(chars);
+            return res;
+        }
+    }
+}
+
 
 
 
 
 /*
-Write a program that reverses the words in a given sentence without changing the
+2.Write a program that reverses the words in a given sentence without changing the
 punctuation and spaces
  */
 
-//{
-//    class Program
-//{
-//    static void Main(string[] args)
-//    {
-//        Console.ForegroundColor = ConsoleColor.White;
-//        Console.WriteLine("Eneter the String:");
-//        Console.ForegroundColor = ConsoleColor.Yellow;
-//        string s = Console.ReadLine();
-//        string[] a = s.Split(' ');
-//        Array.Reverse(a);
-//        Console.ForegroundColor = ConsoleColor.Red;
-//        Console.WriteLine("Reverse String is:");
-//        for (int i = 0; i <= a.Length - 1; i++)
-//        {
-//            Console.ForegroundColor = ConsoleColor.White;
-//            Console.Write(a[i] + "" + ' ');
-//        }
-//        Console.ReadKey();
-//    }
-//}
-//}
+using System;
+namespace ReverseWords
+{
+    class Program
+    {
+        public string ReverseWords(string s)
+        {
+            if (s == null)
+            {
+                return string.Empty;
+            }
+            char[] separators = new char[] { '.', ',', ':', ';', '=', '(', ')', '&', '[', ']', '"', '\'', '/', '\\', '!', '?', ' ' };
+            char[] chars = s.ToCharArray();
+            int n = chars.Length;
+            bool isWord = true;
+            StringBuilder sb = new StringBuilder();
+            List<string> wordsList = new List<string>();
+            List<string> separatorList = new List<string>();
+            foreach (var c in chars)
+            {
+                if (isWord)
+                {
+                    if (separators.Contains(c))
+                    {
+                        wordsList.Add(sb.ToString());
+                        sb.Clear();
+                        isWord = !isWord;
+                    }
+                }
+                else
+                {
+                    if (!separators.Contains(c))
+                    {
+                        separatorList.Add(sb.ToString());
+                        sb.Clear();
+                        isWord = !isWord;
+                    }
+                }
+                sb.Append(c);
+            }
+            separatorList.Add(sb.ToString());
+            sb.Clear();
+            int m = wordsList.Count();
+            for (int i = 0; i < m; i++)
+            {
+                sb.Append(wordsList[m - 1 - i]);
+                sb.Append(separatorList[i]);
+            }
+            return sb.ToString();
+        }
+    }
+}
 
 
 /*
@@ -253,18 +417,115 @@ punctuation and spaces
 and prints them on the console on a single line, separated by comma and space.Print all
 unique palindromes (no duplicates), sorted.
  */
-//var text = Console.ReadLine().ToCharArray();
-//foreach (var letter in text)
-//    (
-//        Console.Write(string.Join(",", $ "\\ u {(int) letter: x4}"));
-//                // print without space and without a comma like this \ u0048 \ u0069 \ u0021
-//            }
+using System;
+namespace ExtractText
+{
+    class Program
+    {
+        public string[] FindPalindrome(string s)
+        {
+            if (s == null)
+            {
+                return null;
+            }
+            HashSet<string> wordsSet = new HashSet<string>();
+            bool isWord = true;
+            StringBuilder sb = new StringBuilder();
+            char[] chars = s.ToCharArray();
+            foreach (var c in chars)
+            {
+                if (isWord)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        wordsSet.Add(sb.ToString());
+                        sb.Clear();
+                        isWord = !isWord;
+                    }
+                    else
+                    {
+                        sb.Append(c);
+                    }
+                }
+                else
+                {
+                    if (char.IsLetter(c))
+                    {
+                        sb.Append(c);
+                        isWord = !isWord;
+                    }
+                }
+            }
+            foreach (var word in wordsSet)
+            {
+                if (!IsPalindrome(word))
+                {
+                    wordsSet.Remove(word);
+                }
+            }
+            return wordsSet.ToArray();
+        }
+        private bool IsPalindrome(string s)
+        {
+            if (s.Length <= 1)
+            {
+                return true;
+            }
+            int i = 0, j = s.Length - 1;
+            while (i < j)
+            {
+                if (s[i] != s[j])
+                {
+                    return false;
+                }
+                else
+                {
+                    i++;
+                    j--;
+                }
+            }
+            return true;
+        }
+    }
+}
 
 /*
 4.Write a program that parses an URL given in the following format:
  */
-//string path = "https://docs.microsoft.com/en-us/dotnet/api/system.uri.scheme?view=net-6.0";
-//Uri uri = new Uri(path);
-//Console.WriteLine(uri.Scheme); 
-//Console.WriteLine(uri.Host);
-//Console.WriteLine(uri.AbsolutePath);
+using System;
+namespace ParseURL
+{
+    class Program
+    {
+        public void ParseUrl(string url)
+        {
+            char[] seperator = new char[] { ':', '/', '/' };
+            int i = url.IndexOfAny(seperator);
+            string protocal, secondHalf;
+            if (i != -1)
+            {
+                protocal = url.Substring(0, i);
+                secondHalf = url.Substring(i + 3);
+            }
+            else
+            {
+                protocal = " ";
+                secondHalf = url;
+            }
+            string[] temp = secondHalf.Split('/');
+            string server = temp[0];
+            string resource;
+            if (temp.Length > 1)
+            {
+                resource = temp[1];
+            }
+            else
+            {
+                resource = " ";
+            }
+            Console.WriteLine($"[protocal] = {protocal}");
+            Console.WriteLine($"[server] = {server}");
+            Console.WriteLine($"[resource] = {resource}");
+        }
+    }
+}
