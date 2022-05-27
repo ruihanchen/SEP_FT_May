@@ -1,41 +1,40 @@
-﻿/*PART I
+/*PART I
  * Test your Knowledge
-  1. What type would you choose for the following “numbers”?
-    A person's telephone number--Int
-    A person's height--Double
+1. What type would you choose for the following “numbers”?
+    A person's telephone number--String
+    A person's height--String
     A person's age--Int
-    A person's gender--Male, Female, Transgender, Gender Neutral, Non-Binary, Agender, Pangender, Genderqueer, Two-Spirit, Third Gender. 
+    A person's gender(Male, Female, Prefer Not To Answer) - enum
     A person's salary--Decimal
-    A book's ISBN--Int
+    A book's ISBN--String
     A book's price--Deciaml 
     A book's shipping weight--Double 
-    A country’s population--Int
-    The number of stars in the universe--Long 
+    A country’s population--Unit
+    The number of stars in the universe--Ulong 
     The number of employees in each of the small or medium businesses in the United Kingdom 
-    (up to about 50,000 employees per business)--Int
+    (up to about 50,000 employees per business)--Short
 
-  2.What are the difference between value type and reference type variables? What is boxing and unboxing?
+2.What are the difference between value type and reference type variables? What is boxing and unboxing?
     Value type 
-        - int, float, double, bool.
-        - Direct contain their data.
-        - Each has its own copy of data.
-        - operation on one can not effect another.
-    reference type
-        - string, stringBuilder, object.
-        - store references to their data (kown as objects).
-        - two reference variable can reference the same object.
-        - operation on one can effect another.
-    boxing - convert a value type to a reference type.
-    unboxing - convert the reference type to a value type.
-  3. What is meant by the terms managed resource and unmanaged resource in .NET
-    managed resource - directly under the control of the garbage collector
-    unmanaged resource - not directly under the control of the garbage collector. 
-  4. Whats the purpose of Garbage Collector in .NET?
-    
-    Garbage Collector: automatic memory manager
-      •Benefits:
-        •Don’t need to manually release memory
-        •Allocates objects on managed heap efficiently*/
+    a. value type will directly hold the value, while reference type will hold the memory address/reference for this value
+    b. value types are stored in stack memory, while reference types will be stored in heap memory
+    c. Value type will not be collected by garbage collector, while reference type will be collected by garbage collector
+    d. value type can be created by Struct or Enum, Reference type can be created by Class, Interface, Delegate or Array etc
+    e. value type cannot accept null values, but reference type can accept null values
+    conversion of a value type to reference type -- boxing
+    conversion of a reference type to a value type -- unboxing
+
+3. What is meant by the terms managed resource and unmanaged resource in .NET
+    Managed resource basically means "managed memory" that is managed by the garbage collector. When we no longer have any
+    references to a managed object (which uses managed memory), the garbage collector will (eventually) release that memory for
+    us.
+    Unmanaged resources are then everything that the garbage collector does not know about, such as such as files, stream and
+    handles, so we need to work with IDisposable interface to release.
+
+4. Whats the purpose of Garbage Collector in .NET?
+    Garbage collector (GC) serves as an automatic memory manager, which manages the allocation and release of memory for an
+    application.
+
 
 /*Practice number sizes and ranges
 1. Create a console application project named /02UnderstandingTypes/ that outputs the
@@ -43,93 +42,132 @@ number of bytes in memory that each of the following number types uses, and the
 minimum and maximum values they can have: sbyte, byte, short, ushort, int, uint, long, ulong, float, double, and decimal.*/
 
 
-//using System;
-//namespace Practice01
-//{
-//    class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            Console.WriteLine("--------------------------------------------------------------------------");
-//            Console.WriteLine("Type    Byte(s) of memory               Min                            Max");
-//            Console.WriteLine("--------------------------------------------------------------------------");
-//            Console.WriteLine($"sbyte   {sizeof(sbyte),-4} {sbyte.MinValue,30} {sbyte.MaxValue,30}");
-//            Console.WriteLine($"byte    {sizeof(byte),-4} {byte.MinValue,30} {byte.MaxValue,30}");
-//            Console.WriteLine($"short   {sizeof(short),-4} {short.MinValue,30} {short.MaxValue,30}");
-//            Console.WriteLine($"ushort  {sizeof(ushort),-4} {ushort.MinValue,30} {ushort.MaxValue,30}");
-//            Console.WriteLine($"int     {sizeof(int),-4} {int.MinValue,30} {int.MaxValue,30}");
-//            Console.WriteLine($"uint    {sizeof(uint),-4} {uint.MinValue,30} {uint.MaxValue,30}");
-//            Console.WriteLine($"long    {sizeof(long),-4} {long.MinValue,30} {long.MaxValue,30}");
-//            Console.WriteLine($"ulong   {sizeof(ulong),-4} {ulong.MinValue,30} {ulong.MaxValue,30}");
-//            Console.WriteLine($"float   {sizeof(float),-4} {float.MinValue,30} {float.MaxValue,30}");
-//            Console.WriteLine($"double  {sizeof(double),-4} {double.MinValue,30} {double.MaxValue,30}");
-//            Console.WriteLine($"decimal {sizeof(decimal),-4} {decimal.MinValue,30} {decimal.MaxValue,30}");
-//            Console.WriteLine("--------------------------------------------------------------------------");
-//        }
-//    }
-//}
+using System;
+namespace Practice01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine($"Number of bytes for int is {sizeof(sbyte)}");
+            Console.WriteLine($"Minimum value for in is {sbyte.MinValue}");
+            Console.WriteLine($"Maximum value for in is {sbyte.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(byte)}");
+            Console.WriteLine($"Minimum value for in is {byte.MinValue}");
+            Console.WriteLine($"Maximum value for in is {byte.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(short)}");
+            Console.WriteLine($"Minimum value for in is {short.MinValue}");
+            Console.WriteLine($"Maximum value for in is {short.MaxValue}");
+           
+            Console.WriteLine($"Number of bytes for int is {sizeof(ushort)}");
+            Console.WriteLine($"Minimum value for in is {ushort.MinValue}");
+            Console.WriteLine($"Maximum value for in is {ushort.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(int)}");
+            Console.WriteLine($"Minimum value for in is {int.MinValue}");
+            Console.WriteLine($"Maximum value for in is {int.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(uint)}");
+            Console.WriteLine($"Minimum value for in is {uint.MinValue}");
+            Console.WriteLine($"Maximum value for in is {uint.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(long)}");
+            Console.WriteLine($"Minimum value for in is {long.MinValue}");
+            Console.WriteLine($"Maximum value for in is {long.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(ulong)}");
+            Console.WriteLine($"Minimum value for in is {ulong.MinValue}");
+            Console.WriteLine($"Maximum value for in is {ulong.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(float)}");
+            Console.WriteLine($"Minimum value for in is {float.MinValue}");
+            Console.WriteLine($"Maximum value for in is {float.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(double)}");
+            Console.WriteLine($"Minimum value for in is {double.MinValue}");
+            Console.WriteLine($"Maximum value for in is {double.MaxValue}");
+            
+            Console.WriteLine($"Number of bytes for int is {sizeof(decimal)}");
+            Console.WriteLine($"Minimum value for in is {decimal.MinValue}");
+            Console.WriteLine($"Maximum value for in is {decimal.MaxValue}");
+        }
+    }
+}
 
 
 
 /*2. Write program to enter an integer number of centuries and convert it to years, days, hours,
 minutes, seconds, milliseconds, microseconds, nanoseconds. Use an appropriate data
 type for every data conversion. Beware of overflows!*/
-//using System;
-//public class CenturiesAndConvert
-//{
-//    public static void Main()
-//    {
-//        int centuries = Convert.ToInt32(Console.ReadLine());
-//        int years = centuries * 100;
-//        int days = (int)(years * 365.2422);
-//        long hours = (long)(days * 24);
-//        long minutes = hours * 60;
-//        ulong seconds = (ulong)(minutes * 60);
-//        ulong miliseconds = (ulong)(seconds * 1000);
-//        ulong microseconds = miliseconds * 1000;
-//        ulong nanoseconds = microseconds * 1000;
+using System;
 
-//        Console.WriteLine($"{centuries} centuries = {years} years = {days} days = {hours} hours = {minutes} minutes = {seconds} seconds = {miliseconds} milliseconds = {microseconds} microseconds = {nanoseconds} nanoseconds");
-//    }
-//}
+namespace CenturiesAndConvert
+{
+    class Program
+    {
+        public void ConvertDate(uint century)
+        {
+            uint year = century * 100;
+            uint days = year * 365 + 24 * century;
+            uint hours = days * 24;
+            uint minutes = hours * 60;
+            uint seconds = minutes * 60;
+            ulong milliseconds = Convert.ToUInt64(seconds) * 1000;
+            ulong microseconds = milliseconds * 1000;
+            ulong nanoseconds = microseconds * 1000;
+            Console.WriteLine($"{century} centuries = {year} years = {days} days = {hours} hours = {minutes} minutes = {seconds} second
+            $"= {milliseconds} miliseconds = {microseconds} microseconds = {nanoseconds} nanoseconds");
+        }
+    }
+}
 
 
 /*PART II
  * 
 1. What happens when you divide an int variable by 0?
-    Error.
+    Compile time error: Division by constant 0.
 
 2. What happens when you divide a double variable by 0?
-    Undefined.
+    Double.PositiveInfinity.
 
 3. What happens when you overflow an int variable, that is, set it to a value beyond its range?
-    If an integer addition overflows, then the result is the low-order bits of the mathematical sum as 
-    represented in some sufficiently large two's-complement format. If overflow occurs, 
-    then the sign of the result is not the same as the sign of the mathematical sum of the two operand values.
+    Compile time error: cannot explicitly convert int type to other data types. 
 
 4. What is the difference between x = y++; and x = ++y;?
-    y++ is post increment and ++x is pre increment. y++ value is incremented after value assign or printed.
+    x = y++;
+    //equivalent to:
+    x = y;
+    y++;
+    x = ++y;
+    //equivalent to:
+    y++;
+    x = y;
 
 5.What is the difference between break, continue, and return when used inside a loop statement?
-    break statement - A loop control statement that is used to terminate the loop..
-    continue statement - pposite to that of break statement, instead of terminating the loop, 
-                         it forces to execute the next iteration of the loop.
-    return statement - Ends the execution of a function, and returns control to the calling function.
+    Break: jump out of the current loop.
+    Continue: skip the current iteration, continue with the following iteration.
+    Return: terminate the loop with some return the control to the calling method.
 
 6. What are the three parts of a for statement and which of them are required?
-    The keyword For that starts the loop, the condition being tested, and the EndFor keyword that terminates the loop.
+    An initializer expression, which executes once at the start of the loop;
+    A conditional expression, which executes on every iteration at the start of the loop to check whether the looping should
+    continue; -required.
+    An iterator expression, which executes on every loop at the bottom of the statement.
 
 7. What is the difference between the = and == operators?
-    The “=” is an assignment operator is used to assign the value on the right to the variable on the left. 
-    The '==' operator checks whether the two given operands are equal or not.
+    = operator: assign the value to the left hand side object.
+    == operator: check if two objects has the same value.
 
 8. Does the following statement compile? for ( ; true; ) ;
-    No
+    Yes
 
 9.What does the underscore _ represent in a switch expression?
-    The underscore (_) character replaces the default keyword to signify that it should match anything if reached.. 
+    The underscore character is used to represent the default return value.
+
 10. What interface must an object implement to be enumerated over by using the foreach statement ?
-    The IEnumerable interface provides support for the foreach iteration
+    IEnumerable, the IEnumerable interface provides support for the foreach iteration.
 */
 
 
@@ -144,27 +182,49 @@ fizzbuzz/.
 Create a console application in Chapter03 named Exercise03 that outputs a simulated
 FizzBuzz game counting up to 100. The output should look something like the following
 screenshot:
-What will happen if this code executes?
+What will happen if this code executes?*/
 
- 
-* int max = 500;
-for (byte i = 0; i<max; i++)
+using System;
+namespace FizzBuzzis
 {
-    if (i%3 == 0)
+    class Program
     {
-        Console.WriteLine("fizz");
-    }else if (i % 5 == 0)
-    {
-        Console.WriteLine("buzz");    
-    }else if(i%3 == 3 && i%5 == 0)
-    {
-        Console.WriteLine("fizzbuzz");
+        public void FizzBuzz(int num)
+        {
+            for (int i = 1; i <= num; i++)
+            {
+                if (i % 15 == 0)
+                {
+                    Console.Write("FizzBuzz ");
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.Write("Fizz ");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.Write("Buzz ");
+                }
+                else
+                {
+                    Console.Write($"{i} ");
+                }
+            }
+        }
+
     }
-    else
-    {
-        Console.WriteLine(i);
+}
+
+int max = 500;
+for (byte i = 0; i < max; i++)
+{
+    Console.WriteLine(i);
+}
+    //infinite loop
+    //becuase once there is an overflow on byte, it will start over from 0, thus the loop will never end
+    // how to solve: inside for loop, we should use int i instead of byte i
     }
-}*/
+
 
 
 /*2.Print-a-Pyramid.Like the star pattern examples that we saw earlier, create a program that
@@ -175,24 +235,33 @@ This can actually be a pretty challenging problem, so here is a hint to get you 
 three total loops. One big one contains two smaller loops. The bigger loop goes from line
 to line. The first of the two inner loops prints the correct number of spaces, while the
 second inner loop prints out the correct number of stars.
+*/
+
+using System;
+namespace PrintPyramid
+{
+    class Program
+    {
+        public void PrintPyramid(int size)
+        {
+            for (int i = 1; i <= size; i++)
+            {
+                for (int j = 0; j <= size - i; j++)
+                {
+                    Console.Write(" ");
+                }
+                for (int j = 1; j < i * 2; j++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+        }
+
+    }
+}
 
 
- * int correctNumber = new Random().Next(3) + 1;
-Console.WriteLine("guest a number between 1 and 3");
-string guess = Console.ReadLine();
-int g = Convert.ToInt32(guess);
-if( g > correctNumber)
-{
-    Console.WriteLine("smaller");
-}
-else if ( g < correctNumber)
-{
-    Console.WriteLine("larger");
-}
-else
-{
-    Console.WriteLine("bingo");
-}*/
 
 
 /*3. Write a program that generates a random number between 1 and 3 and asks the user to
@@ -202,26 +271,38 @@ Also, tell the user if their answer is outside of the range of numbers that are 
 int using this code:
 */
 
-//class Program
-//{
-//    static void Main(string[] args)
-//    {
-//        int layer = 6, space, star;
+using System;
+namespace Generator
+{
+    class Program
+    {
+        public void GuessNumber()
+        {
+            int correctNumber = new Random().Next(3) + 1;
+            Console.Write("Please enter a number between 1 and 3 => ");
+            int guessedNumber = Convert.ToInt32(Console.ReadLine());
+            if (correctNumber == guessedNumber)
+            {
+                Console.WriteLine("You got the correct answer!");
+            }
+            else if (correctNumber < 1 || correctNumber > 3)
+            {
+                Console.WriteLine("You guess was outside of the range");
+            }
+            else if (correctNumber < guessedNumber)
+            {
+                Console.WriteLine("A little bit too high.");
+            }
+            else
+            {
+                Console.WriteLine("A little bit too low.");
+            }
+        }
+    }
+}
 
-//        for (int i = 1; i <= layer; i++)
-//        {
-//            for(space = 1; space <= layer - i; space++)
-//            {
-//                Console.Write(" ");
-//            }
-//            for(star = 1; star <= i *2 -1; star++)
-//            {
-//                Console.Write("*");
-//            }
-//            Console.WriteLine();
-//        }
-//    }
-//}
+
+
 
 /*4.Write a simple program that defines a variable representing a birth date and calculates
 how many days old the person with that birth date is currently.
@@ -230,35 +311,27 @@ Note: once you figure out their age in days, you can calculate the days until th
 anniversary using int daysToNextAnniversary = 10000 - (days % 10000);
 */
 
-//class Program
-//{
-//    static void Main(string[] args)
-//    {   
-//        int correctNumber = new Random().Next(3) + 1;
-
-//        Console.WriteLine("guess a number between 1 and 3");
-//        int guessedNumber = int.Parse(Console.ReadLine());
-
-//        while (guessedNumber != correctNumber)
-//        {
-//            if (guessedNumber > correctNumber)
-//            {
-//                Console.WriteLine("smaller");
-//                break;
-//            }
-//            else if (guessedNumber < correctNumber)
-//            {
-//                Console.WriteLine("larger");
-//                break;
-//            }
-//            else if(guessedNumber>3 || guessedNumber < 1)
-//            {
-//                Console.WriteLine("out of range");
-//            }
-//        }
-//        Console.WriteLine("bingo");
-//    }
-//}
+using System;
+namespace Representor
+{
+    class Program
+    {
+        public void DaysOld()
+        {
+            Console.Write("Please enter the year you were born => ");
+            int year = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Please enter the month you were born => ");
+            int month = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Please enter the year you were born => ");
+            int day = Convert.ToInt32(Console.ReadLine());
+            DateTime DateOfBirth = new DateTime(year, month, day);
+            double diff = (DateTime.Today - DateOfBirth).TotalDays;
+            Console.WriteLine($"You have been lived for {diff} days!");
+            int daysToNextAnniversary = Convert.ToInt32(10000 - (diff % 10000));
+            Console.WriteLine($"There are {daysToNextAnniversary} days left to your next Anniversary");
+        }
+    }
+}
 
 
 /*5.Write a program that greets the user using the appropriate greeting for the time of day.
@@ -266,79 +339,62 @@ Use only if , not else or switch , statements to do so. Be sure to include the f
 greetings
 */
 
-//using System;
+using System;
+namespace GreetsTheUser
+{
+    class Program
+    {
+        public void Greetings()
+        {
+            DateTime moment = DateTime.Now;
+            int hour = moment.Hour;
+            if (hour < 12)
+            {
+                Console.WriteLine("Good Morning!");
+            }
+            else if (hour >= 12 && hour < 17)
+            {
+                Console.WriteLine("Good Afternoon!");
+            }
+            else if (hour >= 17 && hour < 21)
+            {
+                Console.WriteLine("Good Evening!");
+            }
+            else
+            {
+                Console.WriteLine("Good Night!");
+            }
+        }
+    }
+}
 
-//namespace ConsoleApplication
-//{
-//	public class Program
-//	{
-//		public static void Main()
-//		{
 
 
-//			DateTime currentDateTime = DateTime.Now;
-//			//DateTime currentDateTime = new DateTime(2017, 9, 3, 8, 4, 0); //Test data
-//			int currentHour = currentDateTime.Hour;
-//			int startMorningHour = 6;
-//			int startAfternoonHour = 12;
-//			int startEveningHour = 17;
-//			int startNightHour = 22;
 
-//			if (startMorningHour <= currentHour && currentHour < startAfternoonHour)
-//			{
-//				Console.WriteLine("Good morning!");
-//			}
-
-//			;
-//			if (startAfternoonHour <= currentHour && currentHour < startEveningHour)
-//			{
-//				Console.WriteLine("Good Afternoon!");
-//			}
-
-//			;
-//			if (startEveningHour <= currentHour && currentHour < startNightHour)
-//			{
-//				Console.WriteLine("Good Evening!");
-//			}
-
-//			;
-//			if (startNightHour <= currentHour || currentHour < startMorningHour)
-//			{
-//				Console.WriteLine("Good Night!");
-//			}
-
-//			;
-
-//			Console.WriteLine("Right now it is {0}:{1} o'clock.", currentDateTime.Hour, currentDateTime.Minute);
-//		}
-//	}
-//}
 
 
 /*6.Write a program that prints the result of counting up to 24 using four different increments.
 First, count by 1s, then by 2s, by 3s, and finally by 4s.
 */
 
-//using System;
+using System;
+namespace CoutingUp
+{
+    class Program
+    {
+        public void CountByIncrement(int target)
+        {
+            for (int i = 1; i <= 4; i++)
+            {
+                int res = 0;
+                while (res <= target)
+                {
+                    Console.Write($"{res} ");
+                    res = res + i;
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
 
-//public class Program
-//{
-//    public static void Main()
-//    {
-//        CountTo24();
-//    }
-
-//    private static void CountTo24()
-//    {
-//        for (int countBase = 1; countBase <= 24; countBase += 1)
-//        {
-//            Console.Write(countBase.ToString().PadLeft(4) + "|");
-//            for (int countUp = 0; countUp <= 24; countUp += countBase)
-//            {
-//                Console.Write(countUp.ToString().PadLeft(4));
-//            }
-
-//            Console.WriteLine();
-//        }
-//    }
-//}
