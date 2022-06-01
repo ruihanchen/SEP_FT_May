@@ -1,15 +1,36 @@
-﻿/*
+/*
 Test your Knowledge
 1. Describe the problem generics address.
+Allow us to design classes and methods but defer the specification or types until the class or method is declared and called.
+
 2. How would you create a list of strings, using the generic List class?
+List < string > ls = new List<string>
+
 3. How many generic type parameters does the Dictionary class have?
+two.Key and value.
+
 4. True/False. When a generic class has multiple type parameters, they must all match.
+When a generic class has multiple type parameters, they must all match.
+
 5. What method is used to add items to a List object?
+list.Add()
+
 6. Name two methods that cause items to be removed from a List.
+list.Remove()
+list.RemoveAT()
+
 7. How do you indicate that a class has a generic type parameter?
+ClassName<T>
+
 8. True/False. Generic classes can only have one generic type parameter.
+False. (like dictionary)
+
 9. True/False. Generic type constraints limit what can be used for the generic type.
+Generic type constraints limit what can be used for the generic type.
+
 10. True/False. Constraints let you use the methods of the thing you are constraining to.
+Constraints let you use the methods of the thing you are constraining to.
+
 */
 
 
@@ -119,14 +140,6 @@ namespace MyStackk
 
 
 
-
-
-
-
-
-
-
-
 /*
 2.Create a Generic List data structure MyList<T> that can store any data type.
 Implement the following methods.
@@ -139,26 +152,85 @@ Implement the following methods.
 7. T Find (int index)
 */
 
-namespace Recursion
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine(Fibonacci(5));
-        }
+public class MyList<T>{
 
-        public static int Fibonacci(int num)
+    public List<T> List { get; set; }
+    public int cnt { get; set; }
+
+    public MyList()
+    {
+        List = new List<T>();
+        cnt=0;
+    }
+    public void Add(T e)
+    {
+        List.Add(e);
+        cnt++;
+    }
+    public T Remove(int index)
+    {
+        T temp = List[index];
+        List.RemoveAt(index);
+        cnt--;
+    }
+    public bool Constains(T e)
+    {
+        foreach (T item in List)
         {
-            if (num == 1 || num == 2)
+            if (item.Equals(e))
             {
-                return 1;
+                return true;
             }
-            return num + Fibonacci(num - 1);
+        }
+        return false;
+    }
+    public void Clear()
+    {
+        List.Clear();
+        cnt = 0;
+    }
+    public void InserAt(T element, int index)
+    {
+        List<T> temp = new List<T>();
+        int i = 0;
+        bool flag = true;
+        Cnt++;
+        while (i < cnt)
+        {
+            if (i == index && flag)
+            {
+                temp.Add(element);
+                flag = false;
+                continue;
+            }
+            temp.Add(List[i]);
+            i++;
+        }
+    }
+    public void DeletAt(int index)
+    {
+        if (index < cnt)
+        {
+            List.RemoveAt(index);
+            cnt--;
+        }
+        else
+        {
+            throw new IndexOutOfRangeException();
+        }
+    }
+    public T Find(int index)
+    {
+        if (index < cnt)
+        {
+            return List[index];
+        }
+        else
+        {
+            throw new IndexOutOfRangeException();
         }
     }
 }
-
 
 
 
@@ -175,5 +247,30 @@ property called Id. IRepository<T> should have following methods
 5. T GetById(int id)
 */
 
+public interface IRespository
+{
+
+}
+public class GenericRepository<T> : IRespository
+{
+    public void Add(T item)
+    {
+        throw new NotImplementedException();
+    }
+    public void Remove(T item)
+    {
+        throw new NotImplementedException();
+    }
+    void Save()
+    {
+        throw new NotImplementedException();
+    }
+    IEnumerable<T> GetAll() { return Enumerable.Empty<T>(); }
+
+    T GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 
