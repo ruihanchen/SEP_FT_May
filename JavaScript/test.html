@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML And CSS Class</title>
+
+</head>
+
+<body>
+    <h1>HTML And CSS Section</h1>
+    <h2>HTML</h2>
+    <!--This is our Red division below-->
+    <div class="redDiv">
+        <p>hey this is my content <a href="http://www.google.com">right</a> here</p>
+    </div>
+    <p>this is even <span class="redDiv">more</span> content</p>
+    <hr>
+    <h4>This is my list</h4>
+    <a href="http://www.google.com">Google Link</a>
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+        <li>f</li>
+        <li>g</li>
+        <li>h</li>
+        <li>i</li>
+        <li>a</li>
+    </ul>
+    <hr>
+    <form onsubmit="validateForm()" method="post" name="myForm" class="forms">
+        <label for="Email" name="Email">Email: </label>
+        <input type="text" id="Email" name="Email"><br>
+        <label for="Password" name="Password">Password: </label>
+        <input type="password" id="Password" name="Password">
+        <input type="submit" value="Submit">
+        <input type="button" onclick="resetForm()" value="Clear Form">
+    </form>
+    <button id="bgColor">Change BG Color</button>
+    <hr>
+    <table border=“1”>
+        <thead>
+            <tr>
+                <th> Column 1 header </th>
+                <th> Column 2 header </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> Row1, Col1 </td>
+                <td> Row1, Col2 </td>
+            </tr>
+            <tr>
+                <td> Row2, Col1 </td>
+                <td> <a href="https://www.google.com"><button type="button">MyButton</button></a></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td>Total Sum:</td>
+            <td>500</td>
+        </tfoot>
+    </table>
+    <hr>
+    <script src="hw4/hw4.js"></script>
+</body>
+
+</html>
+<!--Can write any comment here-->
